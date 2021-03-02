@@ -1,1 +1,2 @@
-/service/user/cmd/api/user/etc/user-api.yaml
+/service/user/cmd/api/etc/user-api.yaml
+/go.sum
