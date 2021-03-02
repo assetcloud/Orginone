@@ -1,7 +1,7 @@
 package svc
 
 import (
-	"geneOS/service/user/cmd/api/user/internal/config"
+	"user/internal/config"
 )
 
 type ServiceContext struct {

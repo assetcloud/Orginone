@@ -4,7 +4,7 @@ package handler
 import (
 	"net/http"
 
-	"geneOS/service/user/cmd/api/user/internal/svc"
+	"user/internal/svc"
 
 	"github.com/tal-tech/go-zero/rest"
 )
@@ -13,9 +13,19 @@ func RegisterHandlers(engine *rest.Server, serverCtx *svc.ServiceContext) {
 	engine.AddRoutes(
 		[]rest.Route{
 			{
-				Method:  http.MethodGet,
-				Path:    "/from/:name",
-				Handler: UserHandler(serverCtx),
+				Method:  http.MethodPost,
+				Path:    "/user/ping",
+				Handler: pingHandler(serverCtx),
+			},
+			{
+				Method:  http.MethodPost,
+				Path:    "/user/register",
+				Handler: registerHandler(serverCtx),
+			},
+			{
+				Method:  http.MethodPost,
+				Path:    "/user/login",
+				Handler: loginHandler(serverCtx),
 			},
 		},
 	)

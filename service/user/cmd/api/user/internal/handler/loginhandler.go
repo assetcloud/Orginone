@@ -3,23 +3,23 @@ package handler
 import (
 	"net/http"
 
-	"geneOS/service/user/cmd/api/user/internal/logic"
-	"geneOS/service/user/cmd/api/user/internal/svc"
-	"geneOS/service/user/cmd/api/user/internal/types"
+	"user/internal/logic"
+	"user/internal/svc"
+	"user/internal/types"
 
 	"github.com/tal-tech/go-zero/rest/httpx"
 )
 
-func UserHandler(ctx *svc.ServiceContext) http.HandlerFunc {
+func loginHandler(ctx *svc.ServiceContext) http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
-		var req types.Request
+		var req types.LoginReq
 		if err := httpx.Parse(r, &req); err != nil {
 			httpx.Error(w, err)
 			return
 		}
 
-		l := logic.NewUserLogic(r.Context(), ctx)
-		resp, err := l.User(req)
+		l := logic.NewLoginLogic(r.Context(), ctx)
+		resp, err := l.Login(req)
 		if err != nil {
 			httpx.Error(w, err)
 		} else {

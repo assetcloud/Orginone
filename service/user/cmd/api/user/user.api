@@ -1,12 +1,43 @@
-type Request {
-	Name string `path:"name,options=you|me"`
+info(
+	title: "user api"
+	desc: "用户系统"
+	author: "panzhaohui"
+	email: "panzhaohui@msn.com"
+)
+
+type RegisterReq {
+	Username string `json:"username"`
+	Mobile   string `json:"mobile"`
+	Password string `json:"password"`
 }
 
-type Response {
-	Message string `json:"message"`
+type LoginReq {
+	Username string `json:"username"`
+	Password string `json:"password"`
+}
+
+type UserReply {
+	Id       int64  `json:"id"`
+	Username string `json:"username"`
+	Mobile   string `json:"mobile"`
+	Nickname string `json:"nickname"`
+	Gender   string `json:"gender"`
+	JwtToken
+}
+
+type JwtToken {
+	AccessToken  string `json:"accessToken,omitempty"`
+	AccessExpire int64  `json:"accessExpire,omitempty"`
+	RefreshAfter int64  `json:"refreshAfter,omitempty"`
 }
 
 service user-api {
-	@handler UserHandler
-	get /from/:name(Request) returns (Response);
+	@handler ping
+	post /user/ping ()
+	
+	@handler register
+	post /user/register (RegisterReq)
+	
+	@handler login
+	post /user/login (LoginReq) returns (UserReply)
 }

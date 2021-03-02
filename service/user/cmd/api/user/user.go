@@ -4,9 +4,9 @@ import (
 	"flag"
 	"fmt"
 
-	"geneOS/service/user/cmd/api/user/internal/config"
-	"geneOS/service/user/cmd/api/user/internal/handler"
-	"geneOS/service/user/cmd/api/user/internal/svc"
+	"user/internal/config"
+	"user/internal/handler"
+	"user/internal/svc"
 
 	"github.com/tal-tech/go-zero/core/conf"
 	"github.com/tal-tech/go-zero/rest"
