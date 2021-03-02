@@ -1,3 +1,5 @@
+syntax = "v1"
+
 info(
 	title: "user api"
 	desc: "用户系统"

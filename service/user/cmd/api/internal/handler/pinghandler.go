@@ -4,8 +4,8 @@ import (
 	"net/http"
 
 	"github.com/tal-tech/go-zero/rest/httpx"
-	"user/internal/logic"
-	"user/internal/svc"
+	"user/cmd/api/internal/logic"
+	"user/cmd/api/internal/svc"
 )
 
 func pingHandler(ctx *svc.ServiceContext) http.HandlerFunc {

@@ -3,27 +3,25 @@ package logic
 import (
 	"context"
 
-	"user/internal/svc"
-	"user/internal/types"
-
 	"github.com/tal-tech/go-zero/core/logx"
+	"user/cmd/api/internal/svc"
 )
 
-type RegisterLogic struct {
+type PingLogic struct {
 	logx.Logger
 	ctx    context.Context
 	svcCtx *svc.ServiceContext
 }
 
-func NewRegisterLogic(ctx context.Context, svcCtx *svc.ServiceContext) RegisterLogic {
-	return RegisterLogic{
+func NewPingLogic(ctx context.Context, svcCtx *svc.ServiceContext) PingLogic {
+	return PingLogic{
 		Logger: logx.WithContext(ctx),
 		ctx:    ctx,
 		svcCtx: svcCtx,
 	}
 }
 
-func (l *RegisterLogic) Register(req types.RegisterReq) error {
+func (l *PingLogic) Ping() error {
 	// todo: add your logic here and delete this line
 
 	return nil
