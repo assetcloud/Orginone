@@ -5,6 +5,7 @@ import (
 
 	"user/cmd/api/internal/svc"
 	"user/cmd/api/internal/types"
+	"user/model"
 
 	"github.com/tal-tech/go-zero/core/logx"
 )
@@ -24,7 +25,20 @@ func NewRegisterLogic(ctx context.Context, svcCtx *svc.ServiceContext) RegisterL
 }
 
 func (l *RegisterLogic) Register(req types.RegisterReq) error {
-	// todo: add your logic here and delete this line
+	_, err := l.svcCtx.Model.FindOnebyName(req.Username)
+	if err == nil {
+		return errorDuplicateUsername
+	}
 
-	return nil
+	_, err = l.svcCtx.Model.FindOnebyMobile(req.Mobile)
+	if err == nil {
+		return errorDuplicateMobile
+	}
+
+	_, err = l.svcCtx.Model.Insert(model.AsUser{
+		UserName:    req.Username,
+		Pwd:         req.Password,
+		PhoneNumber: req.Mobile,
+	})
+	return err
 }

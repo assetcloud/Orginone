@@ -25,6 +25,8 @@ type (
 		FindOne(id int64) (*AsUser, error)
 		Update(data AsUser) error
 		Delete(id int64) error
+		FindOnebyName(name string) (*AsUser, error)
+		FindOnebyMobile(mobile string) (*AsUser, error)
 	}
 
 	defaultAsUserModel struct {
@@ -45,10 +47,10 @@ type (
 		TenantApplyingState int64          `db:"tenant_applying_state"` // 与租户的隶属关系： 0-注册,新增来的，1-申请的并在审核中的，2-审核通过的（已加入的）3 审核拒绝的，4-全部的 5-0和2的集合
 		UpdateTime          time.Time      `db:"update_time"`           // 最后一次更新时间戳
 		UpdateUser          sql.NullInt64  `db:"update_user"`           // 修改者
-		UserName            sql.NullString `db:"user_name"`             // 用户姓名
+		UserName            string         `db:"user_name"`             // 用户姓名
 		ZcyId               sql.NullString `db:"zcy_id"`                // 1.0id
 		Id                  int64          `db:"id"`                    // 用户代码
-		PhoneNumber         sql.NullString `db:"phone_number"`          // 手机号码
+		PhoneNumber         string         `db:"phone_number"`          // 手机号码
 		TenantCode          sql.NullString `db:"tenant_code"`           // 租户id
 	}
 )
@@ -90,4 +92,32 @@ func (m *defaultAsUserModel) Delete(id int64) error {
 	query := fmt.Sprintf("delete from %s where `id` = ?", m.table)
 	_, err := m.conn.Exec(query, id)
 	return err
+}
+
+func (m *defaultAsUserModel) FindOnebyName(name string) (*AsUser, error) {
+	query := fmt.Sprintf("select %s from %s where `id` = ? limit 1", asUserRows, m.table)
+	var resp AsUser
+	err := m.conn.QueryRow(&resp, query, name)
+	switch err {
+	case nil:
+		return &resp, nil
+	case sqlc.ErrNotFound:
+		return nil, ErrNotFound
+	default:
+		return nil, err
+	}
+}
+
+func (m *defaultAsUserModel) FindOnebyMobile(mobile string) (*AsUser, error) {
+	query := fmt.Sprintf("select %s from %s where `id` = ? limit 1", asUserRows, m.table)
+	var resp AsUser
+	err := m.conn.QueryRow(&resp, query, mobile)
+	switch err {
+	case nil:
+		return &resp, nil
+	case sqlc.ErrNotFound:
+		return nil, ErrNotFound
+	default:
+		return nil, err
+	}
 }
