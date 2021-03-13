@@ -49,9 +49,11 @@ https://www.assetcloud.org.cn
 #### 业务代码填充
 #### 错误处理
 
->项目进展随时同步在本文档。 问题交流
+>项目进展随时同步在本文档。 问题交流。
 
-#### 启动服务
+
+#### 示例代码 user表crudAPI服务  代码利用goctl生产。
+#### 启动服务   
 etc/user-api.yaml文件中配置好数据库，在user目录下面执行
 ```
 go run cmd/api/user.go -f cmd/api/etc/user-api.yaml
