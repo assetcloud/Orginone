@@ -33,7 +33,9 @@
 
 ### 前端利用现有云原生应用管理平台前端
 
-https://www.assetcloud.org.cn
+https://platform.assetcloud.org.cn
+
+前端项目后期开源。
 
 ### 开发流程
 
