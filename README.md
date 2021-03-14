@@ -29,7 +29,7 @@
 
 
 ## 参与项目
-> 本项目利用开源项目go-zero搭建，在正式进入实际开发之前，需要做一些准备工作，比如：Go环境的安装，grpc代码生成使用的工具安装， 必备工具Goctl的安装，Golang环境配置等,熟悉go-zero中的编码规范
+> 本项目对kubernetes能力封装基于[kubevela](https://github.com/oam-dev/kubevela)，应用层开发基于[go-zero](https://github.com/tal-tech/go-zero)。在正式进入实际开发之前，需要做一些准备工作，比如：熟悉kubernetes和kubevela，Go环境的安装，grpc代码生成使用的工具安装， 必备工具Goctl的安装，Golang环境配置等,熟悉go-zero中的编码规范
 
 ### 前端利用现有云原生应用管理平台前端
 
@@ -38,7 +38,7 @@ https://www.assetcloud.org.cn
 ### 开发流程
 
 > goctl环境准备[1]    
-> 数据库设计 参考assetcloud平台项目数据库设计   
+> 数据库设计 参考assetcloud平台项目数据库设计 (/geneOS/service/geneOS.sql)   
 > 业务开发   
 > 创建服务类型（api/rpc/rmq/job/script）   
 > 编写api、proto文件 参考现有assetx后台api文档   
